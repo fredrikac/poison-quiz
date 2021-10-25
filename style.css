@@ -1,0 +1,36 @@
+
+body {
+
+
+    font-family:'Calibri';
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
+
+button {
+
+    background: white;
+    color: black;
+
+}
+
+#lightOrDark {
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+
+@font-face {
+    font-family: halloweenFont;
+    src: url(feast-of-flesh-bb.regular.otf);
+  }
+
+  h2{
+      font-family: halloweenFont;
+      font-size: 36pt;
+  }
