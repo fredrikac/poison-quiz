@@ -9,11 +9,30 @@
 </head>
 <body id="body">
     <h2>Quiz-time!</h2>
-    <div id="quizContainer"></div>
+    <div id="quizContainer"></div><br>
+    <div id="multipleChoice">
+        <legend for="multipleAnswers">10. Vilken av följande växter kan du INTE hitta vilt i Sverige?</legend>
+        
+        <label for="answerA"></label><input type="checkbox" name="multipleAnswers" id="answerA" value="wrong"/>Fingerborgsblomma<br></label>
+
+        
+        <label for="answerB"></label><input type="checkbox" name="multipleAnswers" id="answerB" value="wrong"/>Äkta stormhatt<br></label>
+
+        
+        <label for="answerC"></label><input type="checkbox" name="multipleAnswers" id="answerC" value="correct"/>Änglatrumpet<br></label>
+
+        
+        <label for="answerD"></label><input type="checkbox" name="multipleAnswers" id="answerD" value="wrong"/>Liljekonvalj<br></label>
+
+        
+        <label for="answerE"></label><input type="checkbox" name="multipleAnswers" id="answerE" value="wrong"/>Sprängört<br></label>
+    </div>
+    <br>
     <button id="submit">Skicka in</button>
     <div id="results"></div>
-    <button id="lightOrDark">Utseende</button>
-    <button id="reset">Börja om</button>
+    <button id="lightOrDark">Dark mode</button>
+    <br>
+    <button id="reset">Testa igen</button>
     <script src="main.js"></script>
 </body>
 </html>
