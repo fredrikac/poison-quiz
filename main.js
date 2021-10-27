@@ -1,8 +1,3 @@
-//QUIZ
-
-
-
-
 //FUNKTION bygg quiz
 function buildQuiz(){
 
@@ -17,7 +12,7 @@ function buildQuiz(){
 
         //för varje möjligt svar...
         //skapa en label 
-        //lägg till en radio-knappar för svarsalternativen 
+        //lägg till radio-knappar för svarsalternativen 
         // br för att göra det luftigare och mer läsbart
         for(letter in currentQuestion.answers){
             answers.push(
@@ -29,54 +24,66 @@ function buildQuiz(){
 
         //Lägg till frågan med tillhörande svar till utskriften
         displayQuiz.push(
-            `<br><br><div class="question"> ${currentQuestion.question}</div><br>
+            `<br><div class="question"> ${currentQuestion.question}</div>
             <div class="answers"> ${answers.join(" ")}</div>`
         );
     });
-    
     //Lägg in utskriften i vår div quizContainer
     quizContainer.innerHTML = displayQuiz.join('');
 };
 
 //FUNKTION visa resultat
 function showResults(){
+    //samla svaren
+    let answerContainers = quizContainer.querySelectorAll('.answers');
 
-    //samla svarscontainers från vårt quiz
-    const answerContainers = quizContainer.querySelectorAll('.answers');
-
-    //håll koll på användarens score
+    //samla användarens rätta svar i en variabel
     let numCorrect = 0;
-
+    
     //för varje fråga...
     questionBattery.forEach((currentQuestion, questionNumber)=>{
-        //hitta valt svar
-        const answerContainer = answerContainers[questionNumber];
-        const selector = `input[name=question${questionNumber}]:checked`;
-        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+        //hitta vilket svar användaren valt
+        let answerContainer = answerContainers[questionNumber];
+        //med hjälp av en selector som pekar på den icheckade radioknappen
+        let selector = `input[name=question${questionNumber}]:checked`;
+
+        //ta det valda svaret ELLER om svaret är tomt (så quizet inte kraschar om anv missar en fråga)
+        let userAnswer = (answerContainer.querySelector(selector) || {}).value;
 
         //Om svar är rätt... 
-        //Justera detta så endast rätt svar visas i grönt och endast fel svar visas i rött!
         if (userAnswer === currentQuestion.correctAnswer){
             //lägg till i numCorrect
             numCorrect++;
-            //färga svaret grönt
-            answerContainers[questionNumber].style.color = "lightgreen";
-        }else{
-            //färga röd
-            answerContainers[questionNumber].style.color = "red";
         }
     });
 
+     //CHECKBOXFRÅGAN - kan jag lägga in den i den andra foreachen..?
+     let checkboxes = document.querySelectorAll('input[name="multipleAnswers"]:checked');
+
+     //tom array för valt svar
+     let iCheckadeAnswers = [];
+ 
+     //pusha in svaret i arrayen 
+     checkboxes.forEach((checkbox) => {
+         iCheckadeAnswers.push(checkbox.value);
+     });
+ 
+     //OM det är rätt, lägg till i numCorrect
+     if(iCheckadeAnswers == "correct"){
+         console.log("rätt")
+         numCorrect++;
+     }//om inte, gör ingenting
+
     //OM användaren har 4 rätt eller mindre, blir texten röd.
     if(numCorrect <= 4){
-        resultsContainer.style.color = "red";
-    }else if(numCorrect <= 7)//OM användaren har mer än 4 men mindre än eller lika med 7 rätt blir texten orange
+        resultsContainer.style.color = "#cb0707";
+    }else if(numCorrect <= 7)//ANNARS OM användaren har mer än 4 men mindre än eller lika med 7 rätt blir texten orange
     {
         resultsContainer.style.color = "orange";
     }else{//ANNARS, om användaren har 8-10 rätt blir texten grön. 
         resultsContainer.style.color = "green";
     };
-    resultsContainer.innerHTML = `Du fick ${numCorrect} av ${questionBattery.length}rätt! Testa igen?`;
+    resultsContainer.innerHTML = `<br>Du fick ${numCorrect} av 10 rätt!`;
 }
 
 //FUNKTION för darkmode
@@ -89,7 +96,7 @@ function darkMode(){
 //En array av objekt att lagra frågorna i
 const questionBattery = [
     {
-        question: "Under 1700-1800-tal användes arsenik som en bärande ingrediens i ett färgämne som användes bl.a. i tapeter och tyger. Vilken färg?",
+        question: "1. Under 1700-1800-tal användes arsenik som en bärande ingrediens i ett färgämne som användes bl.a. i tapeter och tyger. Vilken färg?",
         answers: {
             a: "Blå",
             b: "Grön",
@@ -98,16 +105,7 @@ const questionBattery = [
         correctAnswer: "b"
     },
     {
-        question: "Välj den sjukdom som ger dig högst sannolikhet att överleva i en modern kontext:",
-        answers: {
-            a: "Pest",
-            b: "Kolera",
-            c: "Ebola"
-        },
-        correctAnswer: "b"
-    },
-    {
-        question: "Vilket är världens giftigaste toxin?",
+        question: "2. Vilket är världens giftigaste toxin?",
         answers: {
             a: "Botulinumtoxin",
             b: "Digitoxin",
@@ -116,7 +114,7 @@ const questionBattery = [
         correctAnswer: "a"
     },
     {
-        question: "Den ryske KBG-agenten Aleksandr Litvinenko lönnmördades 2006 med vilket ämne?",
+        question: "3. Den ryske KBG-agenten Aleksandr Litvinenko lönnmördades 2006 med vilket ämne?",
         answers: {
             a: "Plutonium",
             b: "Radium-223",
@@ -125,7 +123,7 @@ const questionBattery = [
         correctAnswer: "c"
     },
     {
-        question: "Vilket giftigt ämne har du fått i dig om du behandlas med ämnet berlinerblått?",
+        question: "4. Vilket giftigt ämne har du fått i dig om du behandlas med ämnet berlinerblått?",
         answers: {
             a: "Tallium",
             b: "Kvicksilver",
@@ -134,7 +132,7 @@ const questionBattery = [
         correctAnswer: "a"
     },
     {
-        question: "En annan ryss som utsatts för mordförsök är Aleksej Navalnyj. Vad kallas den typ av nervgift han utsattes för?",
+        question: "5. En annan ryss som utsatts för mordförsök är Aleksej Navalnyj. Vad kallas den typ av nervgift han utsattes för?",
         answers: {
             a: "Klorgas",
             b: "Novitjok",
@@ -143,7 +141,7 @@ const questionBattery = [
         correctAnswer: "b"
     },
     {
-        question: "Giftiga svampar känner de flesta till, men varför är svampar som t.ex. vit flugsvamp så dödliga?",
+        question: "6. Giftiga svampar känner de flesta till, men varför är svampar som t.ex. vit flugsvamp så dödliga?",
         answers: {
             a: "De innehåller ett ämne som ger permanenta cellskador på levern och ibland njurarna",
             b: "Det giftiga ämnet påverkar centrala nervsystemet vilket kan leda till förlamning av andningsmuskulaturen",
@@ -152,7 +150,7 @@ const questionBattery = [
         correctAnswer: "a"
     },
     {
-        question: "Vilket ämne användes för att döda den bulgariske författaren och journalisten i paraplymordet i London 1978?",
+        question: "7. Vilket ämne användes för att döda den bulgariske författaren och journalisten i paraplymordet i London 1978?",
         answers: {
             a: "Kinin",
             b: "Ricin",
@@ -161,7 +159,7 @@ const questionBattery = [
         correctAnswer: "b"
     },
     {
-        question: "Poison ivy eller giftsumak är mest känt för att orsaka utslag på huden. Växten är även släkt med en frukt som är vanligt förekommande i våra affärer. Vilken?",
+        question: "8. Poison ivy eller giftsumak är mest känt för att orsaka utslag på huden. Växten är även släkt med en frukt som är vanligt förekommande i våra affärer. Vilken?",
         answers: {
             a: "Persimon",
             b: "Passionsfrukt",
@@ -170,7 +168,7 @@ const questionBattery = [
         correctAnswer: "c"
     },
     {
-        question: "Hur stor dos nikotin bedöms vara dödlig för en vuxen människa?",
+        question: "9.Hur stor dos nikotin bedöms vara dödlig för en vuxen människa?",
         answers: {
             a: "20mg",
             b: "30mg",
@@ -187,7 +185,7 @@ let submitButton = document.querySelector("#submit"); //skicka in-knappen
 let changeModeButton = document.querySelector("#lightOrDark");//utseende-knappen
 let refreshButton = document.querySelector("#reset");//börja om-knappen
 
-//Kör bygg quiz direkt!
+//Kör bygg quiz direkt
 buildQuiz();
 
 //När användaren klickar på Skicka in, visa resultat
@@ -200,19 +198,6 @@ changeModeButton.addEventListener("click", darkMode);
 refreshButton.addEventListener("click", ()=>{
     location.reload();
 });
-
-
-
-
-//ATT GÖRA: 
-//FIXA STYLING: RADBRYTNING, LÄGG SVARSALTERNATIV PÅ SEPARATA RADER - check
-//FÄRGSTÄLLNING - LJUSGRÖN OCH MÖRKGRÖN PGA POISON
-//FLYTTA UTSEENDE-KNAPP TILL HÖGRA HÖRNET - check 
-//Lägg till en fråga med flerval
-//Fixa färgning av resultaten - orange för 50% och grön för över 80% - check!
-
-
-//Testa om jag kan färga enbart det rätta/felaktiga svarsalternativet - eller ta bort
 
 
 
