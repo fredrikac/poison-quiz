@@ -1,24 +1,36 @@
 
 body {
-
-
+    background: rgb(220,250,225);
+    background: linear-gradient(130deg, rgba(220,250,225,0.9953023445706407) 0%, rgba(191,193,191,1) 100%, rgba(1,17,5,1) 100%);
     font-family:'Calibri';
+    color: #335e3a;
+    line-height: 1.8;
+    
 }
 
 .dark-mode {
-    background-color: black;
+    
+    background: rgb(0,0,0);
+    background: linear-gradient(130deg, rgba(0,0,0,1) 0%, rgba(39,84,44,0.9953023445706407) 100%);
     color: white;
   }
 
 button {
-
     background: white;
-    color: black;
+    color: #335e3a;
+    font-family: halloweenFont;
+    font-size: 14pt;
+    border: none;
+    border-radius: 4px;
+    padding: 15px 32px;
+    width: 13%;
+}
 
+button:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 #lightOrDark {
-
     position: absolute;
     top: 10px;
     right: 10px;
@@ -33,4 +45,12 @@ button {
   h2{
       font-family: halloweenFont;
       font-size: 36pt;
+      padding-left: 20px;
   }
+
+  #results{
+
+    font-size: 18pt;
+
+  }
+
