@@ -1,6 +1,5 @@
 //FUNKTION bygg quiz
 function buildQuiz(){
-
     //en tom array för att hantera utskriften på sidan
     let displayQuiz = [];
 
