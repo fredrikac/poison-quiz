@@ -30,6 +30,7 @@ function buildQuiz(){
     });
     //Lägg in utskriften i vår div quizContainer
     quizContainer.innerHTML = displayQuiz.join('');
+    
 };
 
 //FUNKTION visa resultat
@@ -39,7 +40,7 @@ function showResults(){
 
     //samla användarens rätta svar i en variabel
     let numCorrect = 0;
-    
+
     //för varje fråga...
     questionBattery.forEach((currentQuestion, questionNumber)=>{
         //hitta vilket svar användaren valt
@@ -57,22 +58,24 @@ function showResults(){
         }
     });
 
-     //CHECKBOXFRÅGAN - kan jag lägga in den i den andra foreachen..?
+     //CHECKBOXFRÅGAN 
      let checkboxes = document.querySelectorAll('input[name="multipleAnswers"]:checked');
 
      //tom array för valt svar
      let iCheckadeAnswers = [];
- 
+
      //pusha in svaret i arrayen 
      checkboxes.forEach((checkbox) => {
-         iCheckadeAnswers.push(checkbox.value);
+      iCheckadeAnswers.push(checkbox.value);
      });
- 
+
      //OM det är rätt, lägg till i numCorrect
      if(iCheckadeAnswers == "correct"){
-         console.log("rätt")
-         numCorrect++;
-     }//om inte, gör ingenting
+      console.log("rätt på fråga 10")
+      numCorrect++;
+     }else{
+         console.log("fel på fråga 10")
+     }
 
     //OM användaren har 4 rätt eller mindre, blir texten röd.
     if(numCorrect <= 4){
@@ -198,7 +201,3 @@ changeModeButton.addEventListener("click", darkMode);
 refreshButton.addEventListener("click", ()=>{
     location.reload();
 });
-
-
-
-
